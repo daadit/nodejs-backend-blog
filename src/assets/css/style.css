@@ -91,13 +91,13 @@ ul {
 .navbar-nav .btn {
     background-color: hsl(229, 76%, 66%);
     color: white;
-    border-radius: 5px;
+    border-radius: 30px;
     padding: 0.7rem 1.5rem;
     margin-top: 0.5px;
 }
 
 .navbar-nav .btn:hover {
-    background-color: #048654;
+    background-color: hsl(229, 70%, 58%);
 }
 
 .main {
@@ -190,7 +190,7 @@ ul {
 }
 
 .btnlogin:hover {
-    background-color: #048654;
+    background-color: hsl(229, 76%, 66%);
 }
 
 @media (max-width: 870px) {

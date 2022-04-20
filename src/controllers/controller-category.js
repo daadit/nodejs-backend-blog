@@ -1,10 +1,10 @@
-const config = require('../configs/database');
-const slug = require('slug');
+const config = require("../configs/database");
+const slug = require("slug");
 
-let mysql = require('mysql');
+let mysql = require("mysql");
 let pool = mysql.createPool(config);
 
-pool.on('error', (err) => {
+pool.on("error", (err) => {
     console.error(err);
 });
 
@@ -14,11 +14,11 @@ module.exports = {
             if (err) throw err;
             connection.query(
                 `
-                SELECT * FROM t_category;
+                SELECT * FROM tb_category;
                 `,
                 function (error, results) {
                     if (error) throw error;
-                    res.render('category', {
+                    res.render("category", {
                         url: URL,
                         // urlFront: URLFRONT,
                         userName: req.session.username,
@@ -35,14 +35,14 @@ module.exports = {
         pool.getConnection(function (err, connection) {
             if (err) throw err;
             connection.query(
-                `INSERT INTO t_category SET ? `,
+                `INSERT INTO tb_category SET ? `,
                 {
                     name: req.body.name,
                     slug: categorySlug,
                 },
                 function (error, results) {
                     if (error) throw error;
-                    res.redirect('/category');
+                    res.redirect("/category");
                 }
             );
             connection.release();
@@ -53,14 +53,14 @@ module.exports = {
         pool.getConnection(function (err, connection) {
             if (err) throw err;
             connection.query(
-                `UPDATE t_category SET
+                `UPDATE tb_category SET
                 name = ?,
                 slug = ?
             WHERE category_id = ?`,
                 [req.body.name, categorySlug, req.body.id],
                 function (error, results) {
                     if (error) throw error;
-                    res.redirect('/category');
+                    res.redirect("/category");
                 }
             );
             connection.release();
@@ -70,12 +70,12 @@ module.exports = {
         pool.getConnection(function (err, connection) {
             if (err) throw err;
             connection.query(
-                `DELETE FROM t_category
+                `DELETE FROM tb_category
                 WHERE category_id = ?`,
                 [req.body.id],
                 function (error, results) {
                     if (error) throw error;
-                    res.redirect('/category');
+                    res.redirect("/category");
                 }
             );
             connection.release();

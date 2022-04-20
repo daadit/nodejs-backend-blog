@@ -81,7 +81,7 @@ ul {
 }
 
 .navbar-expand-lg .navbar-nav .nav-link.active {
-    color: #05924e;
+    color: hsl(229, 70%, 58%);
 }
 
 .navbar-nav button {
@@ -243,4 +243,9 @@ ul {
     border: 1px solid #f44336;
     border-left: 4px solid #f82f21;
     background-color: #ffffff;
+}
+
+.footer-name {
+    text-decoration: none;
+    color: hsl(229, 70%, 58%);
 }

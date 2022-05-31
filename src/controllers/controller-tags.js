@@ -1,10 +1,10 @@
-const config = require('../configs/database');
+const config = require("../configs/database");
 // const slug = require('slug');
 
-let mysql = require('mysql');
+let mysql = require("mysql");
 let pool = mysql.createPool(config);
 
-pool.on('error', (err) => {
+pool.on("error", (err) => {
     console.error(err);
 });
 
@@ -14,11 +14,11 @@ module.exports = {
             if (err) throw err;
             connection.query(
                 `
-                SELECT * FROM t_tags;
+                SELECT * FROM tb_tags;
                 `,
                 function (error, results) {
                     if (error) throw error;
-                    res.render('tags', {
+                    res.render("tags", {
                         url: URL,
                         // urlFront: URLFRONT,
                         userName: req.session.username,
@@ -34,13 +34,13 @@ module.exports = {
         pool.getConnection(function (err, connection) {
             if (err) throw err;
             connection.query(
-                `INSERT INTO t_tags SET ? `,
+                `INSERT INTO tb_tags SET ? `,
                 {
                     name: req.body.name,
                 },
                 function (error, results) {
                     if (error) throw error;
-                    res.redirect('/tags');
+                    res.redirect("/tags");
                 }
             );
             connection.release();
@@ -50,13 +50,13 @@ module.exports = {
         pool.getConnection(function (err, connection) {
             if (err) throw err;
             connection.query(
-                `UPDATE t_tags SET
+                `UPDATE tb_tags SET
                     name = ?
                 WHERE tags_id = ?`,
                 [req.body.name, req.body.id],
                 function (error, results) {
                     if (error) throw error;
-                    res.redirect('/tags');
+                    res.redirect("/tags");
                 }
             );
             connection.release();
@@ -66,12 +66,12 @@ module.exports = {
         pool.getConnection(function (err, connection) {
             if (err) throw err;
             connection.query(
-                `DELETE FROM t_tags
+                `DELETE FROM tb_tags
                 WHERE tags_id = ?`,
                 [req.body.id],
                 function (error, results) {
                     if (error) throw error;
-                    res.redirect('/tags');
+                    res.redirect("/tags");
                 }
             );
             connection.release();
